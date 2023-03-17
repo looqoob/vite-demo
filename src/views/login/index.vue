@@ -13,7 +13,7 @@
       </div>
       <div class="inputs">
         <el-input v-model="from.email" placeholder="请输入账号">
-          <template #prepend>账号:11</template>
+          <template #prepend>账号:1122</template>
         </el-input>
         <el-input v-model="from.password" placeholder="请输入密码">
           <template #prepend>密码:</template>
