@@ -26,7 +26,6 @@
             v-else
             ref="refInput"
             maxlength="40"
-            v-focus
             v-model="item.money"
             @blur="editShow2(index)"
           />
@@ -92,7 +91,7 @@ const refInput = ref();
 const editShow = (index: number) => {
   data[index].show = false;
   nextTick(() => {
-    refInput.value.focus();
+    // refInput.value.focus();
     console.log(refInput.value);
   });
 };
