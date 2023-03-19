@@ -31,7 +31,10 @@
           还未注册？<el-button type="info" link plain size="small">点击这里</el-button>
         </div>
       </div>
-      <div class="from_buttom"></div>
+      <div class="from_buttom">
+        <div class=""></div>
+        <div class=""></div>
+      </div>
     </div>
   </div>
 </template>
