@@ -16,7 +16,7 @@
           <el-input v-model="from.email" placeholder="请输入账号">
             <template #prepend>账号:</template>
           </el-input>
-          <el-input v-model="from.password" placeholder="请输入密码">
+          <el-input v-model="from.password" placeholder="请输入密码" type="password">
             <template #prepend>密码:</template>
           </el-input>
         </div>
@@ -25,7 +25,7 @@
           <el-checkbox v-model="from.checked" label="记住密码" size="small" />
         </div>
         <div class="loginBtn">
-          <el-button type="primary" plain>登录</el-button>
+          <el-button type="primary" plain @click="login">登录</el-button>
         </div>
         <div class="logon">
           还未注册？<el-button type="info" link plain size="small">点击这里</el-button>
@@ -42,12 +42,24 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import Animation from "@/components/animation.vue";
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 let from = reactive({
   email: '',
   password: '',
   checked: false,
 })
+const router = useRouter()
+const login = () => {
+  if (from.email == "admin" && from.password == "123456") {
+    ElMessage({
+      message: '登录成功',
+      type: 'success',
+    })
+    router.push({path: '/layout'})
+  }
+}
 </script>
 
 <style scoped lang="less">

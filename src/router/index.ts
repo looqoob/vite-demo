@@ -8,6 +8,7 @@ import Printer from '../views/printer/index.vue';
 import Look from '../views/look/index.vue';
 import HelloWorld from '../views/helloWorld/index.vue';
 import Animation from '../views/animation/index.vue';
+import SvgDemo from '../views/svgDemo/index.vue';
 
 const router = createRouter({
     history:createWebHistory(),
@@ -22,7 +23,7 @@ const router = createRouter({
       },
       {
         path:'/layout',
-        redirect: '/layout/home',
+        redirect: '/home',
         component: Layout,
         children: [
           {
@@ -52,6 +53,10 @@ const router = createRouter({
           {
             path:'/animation',
             component:Animation,
+          },
+          {
+            path:'/svgDemo',
+            component:SvgDemo,
           },
         ]
       },
