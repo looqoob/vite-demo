@@ -6,7 +6,7 @@
 
 <script setup lang='ts'>
 import { ref,reactive } from 'vue'
-import HelloWorld from '../../components/HelloWorld.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 
 const lalala = (e: any) => {
   console.log(e);

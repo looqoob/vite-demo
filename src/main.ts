@@ -9,6 +9,8 @@ import {createPinia} from 'pinia'
 // 饿了么ui引入
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+// 国际化
+// import { zhCn } from "element-plus/dist/locale/zh-cn.mjs"; ,{locale: zhCn}
 
 // 暗黑模式css
 import 'element-plus/theme-chalk/dark/css-vars.css'

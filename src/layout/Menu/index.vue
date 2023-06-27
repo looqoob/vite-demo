@@ -27,6 +27,7 @@
           <span>组件分类二</span>
         </template>
           <el-menu-item index="/helloWorld">helloWorld</el-menu-item>
+          <el-menu-item index="/modelValue">model父子双绑</el-menu-item>
           <el-menu-item index="/animation">动画-水波纹</el-menu-item>
           <el-menu-item index="/svgDemo">svg学习</el-menu-item>
       </el-sub-menu>

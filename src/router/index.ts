@@ -9,6 +9,7 @@ import Look from '../views/look/index.vue';
 import HelloWorld from '../views/helloWorld/index.vue';
 import Animation from '../views/animation/index.vue';
 import SvgDemo from '../views/svgDemo/index.vue';
+import ModelValue from '../views/modelValue/index.vue';
 
 const router = createRouter({
     history:createWebHistory(),
@@ -57,6 +58,10 @@ const router = createRouter({
           {
             path:'/svgDemo',
             component:SvgDemo,
+          },
+          {
+            path:'/modelValue',
+            component:ModelValue,
           },
         ]
       },

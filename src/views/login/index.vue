@@ -45,14 +45,21 @@ import Animation from "@/components/animation.vue";
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
-let from = reactive({
+let from = reactive(JSON.parse((localStorage.getItem('from') as any)) || {
   email: '',
   password: '',
-  checked: false,
+  checked: false
 })
+console.log(from);
+
 const router = useRouter()
 const login = () => {
   if (from.email == "admin" && from.password == "123456") {
+    if (from.checked) {
+      localStorage.setItem('from', JSON.stringify(from))
+    } else {
+      localStorage.removeItem('from')
+    }
     ElMessage({
       message: '登录成功',
       type: 'success',
