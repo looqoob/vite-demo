@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="inputs">
-          <el-input v-model="from.email" placeholder="请输入账号">
+          <el-input v-model="from.name" placeholder="请输入账号">
             <template #prepend>账号:</template>
           </el-input>
           <el-input v-model="from.password" placeholder="请输入密码" type="password">
@@ -44,28 +44,43 @@ import { ref, reactive } from "vue";
 import Animation from "@/components/animation.vue";
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { userLogin } from '@/api/user'
 
 let from = reactive(JSON.parse((localStorage.getItem('from') as any)) || {
-  email: '',
+  name: '',
   password: '',
   checked: false
 })
-console.log(from);
 
 const router = useRouter()
 const login = () => {
-  if (from.email == "admin" && from.password == "123456") {
-    if (from.checked) {
-      localStorage.setItem('from', JSON.stringify(from))
-    } else {
-      localStorage.removeItem('from')
+  userLogin(from.name, from.password).then(res => {
+    if (res.data.code == 200) {
+      if (from.checked) {
+        localStorage.setItem('from', JSON.stringify(from))
+      } else {
+        localStorage.removeItem('from')
+      }
+      ElMessage({
+        message: '登录成功',
+        type: 'success',
+      })
+      localStorage.setItem('user',JSON.stringify(res.data.user))
+      router.push({path: '/layout'})
+    } else if(res.data.code == 'error') {
+      ElMessage({
+        message: '登录失败，请确认账号密码是否正确！',
+        type: 'error',
+      })
+      from.name = '',
+      from.password = ''
     }
+  }).catch(err => {
     ElMessage({
-      message: '登录成功',
-      type: 'success',
-    })
-    router.push({path: '/layout'})
-  }
+        message: '登录失败',
+        type: 'error',
+      })
+  })
 }
 </script>
 
@@ -78,7 +93,7 @@ const login = () => {
   top: calc(50% - 200px);
   left: calc(50% - 150px);
   border-radius: 10px;
-  animation: from 2s ease;
+  animation: from 1s ease;
 }
 
 .mainFrom {
@@ -181,7 +196,7 @@ const login = () => {
   z-index: 2;
   transform: rotate(-5deg);
   border-radius: 25px;
-  animation: red1 4s ease;
+  animation: red1 2s ease;
 }
 
 .blue {
@@ -189,7 +204,7 @@ const login = () => {
   z-index: 1;
   transform: rotate(5deg);
   border-radius: 25px;
-  animation: blue1 4s ease;
+  animation: blue1 2s ease;
 }
 
 @keyframes red1 {

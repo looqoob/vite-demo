@@ -4,6 +4,14 @@ import { Names } from './store-name'
 export const userStore = defineStore(Names.TEXT,{
   state: () => {
     return {
+      tabData: [
+        {
+          path:'/home',
+          meta: {
+            title: '首页'
+          }
+        }
+      ],
       nightShow: localStorage.getItem('show'),
       background_day: {
         background_h1: '#fff',
@@ -32,7 +40,14 @@ export const userStore = defineStore(Names.TEXT,{
     editNightShow(bl:any) {
       localStorage.setItem('show',bl)
       console.log(111);
-      
+    },
+    addTabData(route: any) {
+      if (!this.tabData.find(v => v.path == route.path)) {
+        this.tabData.push(route)
+      }
+    },
+    delTabData(index: number) {
+      this.tabData.splice(index,1)
     }
   }
 })

@@ -10,6 +10,16 @@ export default defineConfig({
       "@": path.resolve("./src"),
     },
   },
+  // 配置代理跨域
+  server: {
+    open: false,
+    proxy: {
+      '/api': {
+        target: 'http://syt.atguigu.cn',
+        changeOrigin: true
+      }
+    }
+  }
 })
 
 // import { defineConfig } from 'vite'
