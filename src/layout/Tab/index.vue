@@ -6,6 +6,7 @@
         :checked="item.path === router.currentRoute.value.fullPath"
         effect="Plain"
         @click="tabClick(item, index)"
+        @mouseup="mouseup($event, index)"
         v-for="(item, index) in tabData"
         :key="item.path">
         <span>{{ item.meta.title }}</span>
@@ -31,6 +32,12 @@ const tabClick = (item: any, index: number) => {
   router.push({ path: item.path });
 };
 
+const mouseup = (e: any, index: number) => {
+  e.preventDefault();
+  if (e.button == 1) {
+    delTabData(index)
+  }
+}
 const delTabData = (index: number) => {
   // 删除的是否为当前页面
   if (tabData[index].path == router.currentRoute.value.fullPath) {

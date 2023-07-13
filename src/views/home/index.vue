@@ -34,13 +34,13 @@
         <el-col :span="12">
           <el-card>
             <p class="echartsTitle">图表1</p>
-            <Echarts id="aaa" :style="style" :option="option1"></Echarts>
+            <Echarts id="aa" :style="style" :option="option1"></Echarts>
           </el-card>
         </el-col>
         <el-col :span="12">
           <el-card>
             <p class="echartsTitle">图表2</p>
-            <Echarts id="bbb" :style="style" :option="option2"></Echarts>
+            <Echarts id="bb" :style="style" :option="option2"></Echarts>
           </el-card>
         </el-col>
       </el-row>
@@ -217,7 +217,7 @@ const option2 = reactive({
   }
 }
 .echartsTitle {
-  margin-top: 20px;
+  padding-top: 20px;
   text-align: center;
 }
 </style>

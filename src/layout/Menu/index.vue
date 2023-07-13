@@ -36,20 +36,19 @@
         <el-sub-menu index="3">
           <template #title>
             <el-icon><Mug /></el-icon>
-            <span>组件分类三</span>
+            <span>外部页面</span>
           </template>
-          <el-menu-item index="3-1">item one</el-menu-item>
-          <el-menu-item index="3-2">item two</el-menu-item>
-          <el-menu-item index="3-3">item three</el-menu-item>
+          <el-menu-item index="/iframeCsdn">csdn</el-menu-item>
+          <el-menu-item index="/iframeVue3">vue3官网</el-menu-item>
+          <el-menu-item index="/iframeBilibili">b站</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="4">
           <template #title>
-            <el-icon><Apple /></el-icon>
-            <span>组件分类四</span>
+            <el-icon><Setting /></el-icon>
+            <span>系统管理</span>
           </template>
-          <el-menu-item index="4-1">item one</el-menu-item>
-          <el-menu-item index="4-2">item two</el-menu-item>
-          <el-menu-item index="4-3">item three</el-menu-item>
+          <el-menu-item index="/userManagement">用户管理</el-menu-item>
+          <el-menu-item index="/roleManagement">角色管理</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </el-row>
@@ -68,7 +67,7 @@ import {
   Pear,
   Mug,
   Watermelon,
-  Apple,
+  Setting,
   ArrowRightBold,
   ArrowLeftBold,
 } from "@element-plus/icons-vue";

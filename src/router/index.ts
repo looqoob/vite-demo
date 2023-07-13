@@ -11,7 +11,12 @@ import HelloWorld from '../views/helloWorld/index.vue';
 import Animation from '../views/animation/index.vue';
 import SvgDemo from '../views/svgDemo/index.vue';
 import ModelValue from '../views/modelValue/index.vue';
-import NavigationBar from '@/views/navigationBar/index.vue'
+import NavigationBar from '@/views/navigationBar/index.vue';
+import IframeCsdn from '@/views/iframe/csdn/index.vue';
+import IframeVue3 from '@/views/iframe/vue3/index.vue';
+import IframeBilibili from '@/views/iframe/bilibili/index.vue';
+import UserManagement from '@/views/system/userManagement/index.vue';
+import RoleManagement from '@/views/system/roleManagement/index.vue';
 import { ElMessage } from 'element-plus';
 
 const router = createRouter({
@@ -96,6 +101,41 @@ const router = createRouter({
             component:NavigationBar,
             meta: {
               title: '导航栏'
+            }
+          },
+          {
+            path:'/iframeCsdn',
+            component:IframeCsdn,
+            meta: {
+              title: 'csdn'
+            }
+          },
+          {
+            path:'/iframeVue3',
+            component:IframeVue3,
+            meta: {
+              title: 'Vue3官网'
+            }
+          },
+          {
+            path:'/iframeBilibili',
+            component:IframeBilibili,
+            meta: {
+              title: 'b站'
+            }
+          },
+          {
+            path:'/userManagement',
+            component:UserManagement,
+            meta: {
+              title: '用户管理'
+            }
+          },
+          {
+            path:'/roleManagement',
+            component:RoleManagement,
+            meta: {
+              title: '角色管理'
             }
           },
         ]

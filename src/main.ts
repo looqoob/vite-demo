@@ -8,6 +8,7 @@ import {createPinia} from 'pinia'
 
 // 饿了么ui引入
 import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 // 国际化
 // import { zhCn } from "element-plus/dist/locale/zh-cn.mjs"; ,{locale: zhCn}
@@ -16,4 +17,4 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const pinia = createPinia()
-createApp(App).use(router).use(ElementPlus).use(pinia).mount('#app')
+createApp(App).use(router).use(ElementPlus,{locale: zhCn}).use(pinia).mount('#app')
