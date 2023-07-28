@@ -6,7 +6,7 @@ export const userStore = defineStore(Names.TEXT,{
     return {
       tabData: [
         {
-          path:'/home',
+          path:'/layout/home',
           meta: {
             title: '首页'
           }
@@ -39,7 +39,6 @@ export const userStore = defineStore(Names.TEXT,{
   actions: {
     editNightShow(bl:any) {
       localStorage.setItem('show',bl)
-      console.log(111);
     },
     addTabData(route: any) {
       if (!this.tabData.find(v => v.path == route.path)) {

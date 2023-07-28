@@ -79,7 +79,6 @@ const logout = () => {
 
 const headerImg = ref("");
 const mousemove = () => {
-  console.log(11);
 };
 const user = reactive(JSON.parse(localStorage.getItem('user') as any))
 </script>

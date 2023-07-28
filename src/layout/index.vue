@@ -10,12 +10,16 @@
 </template>
 
 <script setup lang='ts'>
-import { ref,reactive } from 'vue'
+import { ref,reactive, onMounted } from 'vue'
 import Header from './Header/index.vue'
 import Tab from './Tab/index.vue'
 import Main from './Main/index.vue'
 import Menu from './Menu/index.vue'
 
+// 项目初始化需要获取的字典值
+onMounted(() => {
+  
+})
 </script>
 
 <style lang="less" scoped>
@@ -26,6 +30,7 @@ import Menu from './Menu/index.vue'
     .layout-right{
       flex: 1;
       display: flex;
+      overflow: hidden;
       flex-direction: column;
     }
   }

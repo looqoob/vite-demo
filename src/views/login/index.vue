@@ -44,7 +44,11 @@ import { ref, reactive } from "vue";
 import Animation from "@/components/animation.vue";
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { getAdminMenuListByRole } from "@/api/role/index";
+import { getPermissionListByRoleId } from "@/api/permission/index";
 import { userLogin } from '@/api/user'
+import { setRoutes } from "@/router"
+import { number } from "echarts";
 
 let from = reactive(JSON.parse((localStorage.getItem('from') as any)) || {
   name: '',
@@ -66,7 +70,9 @@ const login = () => {
         type: 'success',
       })
       localStorage.setItem('user',JSON.stringify(res.data.user))
-      router.push({path: '/layout'})
+      localStorage.setItem('token',JSON.stringify(res.data.token))
+      getPremissionList()
+      getMenuList()
     } else if(res.data.code == 'error') {
       ElMessage({
         message: '登录失败，请确认账号密码是否正确！',
@@ -80,6 +86,20 @@ const login = () => {
         message: '登录失败',
         type: 'error',
       })
+  })
+}
+const getMenuList = () => {
+  getAdminMenuListByRole({
+    id: JSON.parse(localStorage.getItem("user") || "").role,
+  }).then((res) => {
+    localStorage.setItem("menu", JSON.stringify(res.data.data));
+    setRoutes()
+    router.push({path: '/layout'})
+  });
+}
+const getPremissionList = () => {
+  getPermissionListByRoleId({roleid: JSON.parse(localStorage.getItem("user") || "").role}).then(res => {
+    sessionStorage.setItem('permission',JSON.stringify(res.data.data))
   })
 }
 </script>

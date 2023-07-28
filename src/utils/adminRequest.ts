@@ -9,6 +9,7 @@ const adminRequest = axios.create({
 // 请求拦截器
 adminRequest.interceptors.request.use((config) => {
   // 请求拦截器回调注入的对象，需要1返回
+  config.headers['token'] = localStorage.getItem('token')
   return config
 })
 
@@ -21,7 +22,7 @@ adminRequest.interceptors.response.use((response) => {
   // 获取状态码处理错误
   let status = error.response.status;
   switch(status) {
-    case 404:
+    case 404 | 400:
       ElMessage({
         type: 'error',
         message: error.message

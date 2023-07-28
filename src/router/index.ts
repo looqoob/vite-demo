@@ -17,6 +17,7 @@ import IframeVue3 from '@/views/iframe/vue3/index.vue';
 import IframeBilibili from '@/views/iframe/bilibili/index.vue';
 import UserManagement from '@/views/system/userManagement/index.vue';
 import RoleManagement from '@/views/system/roleManagement/index.vue';
+import MenuManagement from '@/views/system/menuManagement/index.vue';
 import { ElMessage } from 'element-plus';
 
 const router = createRouter({
@@ -32,116 +33,151 @@ const router = createRouter({
         redirect: '/layout',
       },
       {
-        path:'/layout',
-        redirect: '/home',
-        component: Layout,
-        children: [
-          {
-            path:'/home',
-            component:Home,
-          },
-          {
-            path:'/water',
-            component:Water,
-            meta: {
-              title: '瀑布流'
-            }
-          },
-          {
-            path:'/echarts',
-            component:Echarts,
-            meta: {
-              title: 'Echarts图表'
-            }
-          },
-          {
-            path:'/helloWorld',
-            component:HelloWorld,
-            meta: {
-              title: 'helloWorld'
-            }
-          },
-          {
-            path:'/printer',
-            component:Printer,
-            meta: {
-              title: '打印'
-            }
-          },
-          {
-            path:'/look',
-            component:Look,
-            meta: {
-              title: '摄像头'
-            }
-          },
-          {
-            path:'/animation',
-            component:Animation,
-            meta: {
-              title: '水波动画'
-            }
-          },
-          {
-            path:'/svgDemo',
-            component:SvgDemo,
-            meta: {
-              title: 'svg学习'
-            }
-          },
-          {
-            path:'/modelValue',
-            component:ModelValue,
-            meta: {
-              title: '双向绑定'
-            }
-          },
-          {
-            path:'/navigationBar',
-            component:NavigationBar,
-            meta: {
-              title: '导航栏'
-            }
-          },
-          {
-            path:'/iframeCsdn',
-            component:IframeCsdn,
-            meta: {
-              title: 'csdn'
-            }
-          },
-          {
-            path:'/iframeVue3',
-            component:IframeVue3,
-            meta: {
-              title: 'Vue3官网'
-            }
-          },
-          {
-            path:'/iframeBilibili',
-            component:IframeBilibili,
-            meta: {
-              title: 'b站'
-            }
-          },
-          {
-            path:'/userManagement',
-            component:UserManagement,
-            meta: {
-              title: '用户管理'
-            }
-          },
-          {
-            path:'/roleManagement',
-            component:RoleManagement,
-            meta: {
-              title: '角色管理'
-            }
-          },
-        ]
+        path: '/:cathchAll(.*)',
+        component: () => import('@/views/404/index.vue')
       },
+      // {
+      //   path:'/layout',
+      //   redirect: '/layout/home',
+      //   component: Layout,
+      //   children: [
+      //     {
+      //       path:'/layout/home',
+      //       component:Home,
+      //     },
+      //     {
+      //       path:'/layout/water',
+      //       component:Water,
+      //       meta: {
+      //         title: '瀑布流'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/echarts',
+      //       component:Echarts,
+      //       meta: {
+      //         title: 'Echarts图表'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/helloWorld',
+      //       component:HelloWorld,
+      //       meta: {
+      //         title: 'helloWorld'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/printer',
+      //       component:Printer,
+      //       meta: {
+      //         title: '打印'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/look',
+      //       component:Look,
+      //       meta: {
+      //         title: '摄像头'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/animation',
+      //       component:Animation,
+      //       meta: {
+      //         title: '水波动画'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/svgDemo',
+      //       component:SvgDemo,
+      //       meta: {
+      //         title: 'svg学习'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/modelValue',
+      //       component:ModelValue,
+      //       meta: {
+      //         title: '双向绑定'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/navigationBar',
+      //       component:NavigationBar,
+      //       meta: {
+      //         title: '导航栏'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/iframeCsdn',
+      //       component:IframeCsdn,
+      //       meta: {
+      //         title: 'csdn'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/iframeVue3',
+      //       component:IframeVue3,
+      //       meta: {
+      //         title: 'Vue3官网'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/iframeBilibili',
+      //       component:IframeBilibili,
+      //       meta: {
+      //         title: 'b站'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/userManagement',
+      //       component:UserManagement,
+      //       meta: {
+      //         title: '用户管理'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/roleManagement',
+      //       component:RoleManagement,
+      //       meta: {
+      //         title: '角色管理'
+      //       }
+      //     },
+      //     {
+      //       path:'/layout/menuManagement',
+      //       component:MenuManagement,
+      //       meta: {
+      //         title: '菜单管理'
+      //       }
+      //     },
+      //   ]
+      // },
     ]
 })
+
+export const setRoutes = () => {
+  const menus = JSON.parse(localStorage.getItem('menu') || '');
+  if (menus) {
+    const layoutRoute: any = { path:'/layout', redirect: '/layout/home', component: () => import('@/layout/index.vue'), children:[] }
+    menus.forEach((item: any) => {
+      if (item.path) {
+        let itemMenu = { path:item.path, component: () => import(`@/views/${item.pagepath}/index.vue`), meta:{title: item.name} }
+        layoutRoute.children.push(itemMenu)
+      } else if(item.children && item.children.length) {
+        item.children.forEach((item2: any) => {
+          if (item2.path) {
+            let itemMenu = { path:item2.path, component: () => import(`@/views/${item2.pagepath}/index.vue`), meta:{title: item2.name} }
+            layoutRoute.children.push(itemMenu)
+          }
+        })
+      }
+    });
+    console.log(layoutRoute);
+    
+    router.addRoute(layoutRoute)
+  }
+}
+setRoutes()
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
@@ -153,7 +189,7 @@ router.beforeEach((to, from, next) => {
           type: 'error',
           message: "登录状态无法前往登录页哦"
         })
-        next('/home')
+        next('/layout/home')
       }
   } else {
     if (localStorage.getItem('user') !== null) {
