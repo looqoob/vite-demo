@@ -1,16 +1,4 @@
 <template>
-  <!-- <div class="tab">
-    <el-tag
-      v-for="tag in tags"
-      :key="tag.name"
-      class="mx-1"
-      closable
-      :type="tag.type"
-      size="small"
-    >
-      {{ tag.name }}
-    </el-tag>
-  </div> -->
   <div class="main">
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
@@ -27,13 +15,6 @@
 // import {ref} from 'vue'
 import { userStore } from "../../store";
 const colorStyle: any = userStore();
-// const tags = ref([
-//   { name: 'Tag 1', type: '' },
-//   { name: 'Tag 2', type: 'success' },
-//   { name: 'Tag 3', type: 'info' },
-//   { name: 'Tag 4', type: 'warning' },
-//   { name: 'Tag 5', type: 'danger' },
-// ])
 </script>
 
 <style lang="less" scoped>

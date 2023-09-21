@@ -25,6 +25,8 @@ const app = createApp(App).use(router).use(ElementPlus,{locale: zhCn}).use(pinia
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+console.log(directives);
+
 Object.keys(directives).forEach(key => {  //Object.keys() 返回一个数组，值是所有可遍历属性的key名
   app.directive(key, (directives as { [key: string ]: Directive })[key])  //key是自定义指令名字；后面应该是自定义指令的值，值类型是string
 })

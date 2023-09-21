@@ -144,8 +144,8 @@
                 class="avatar-uploader"
                 action="http://localhost:9090/files/upload"
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload"
+                :on-success="handleAvatarSuccess2"
+                :before-upload="beforeAvatarUpload2"
               >
                 <img v-if="form2.img" :src="form2.img" class="avatar" />
                 <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
@@ -182,8 +182,7 @@
 import { Search, Edit, Delete, Plus } from "@element-plus/icons-vue";
 import { ref, reactive, onMounted } from "vue";
 import { getRoleAllList } from "@/api/role/index";
-import { getUserList, addUser, delUser, editUser } from "@/api/user/index";
-import { getDate } from "@/utils/date";
+import { getUserList, addUser, delUser, editUserAll } from "@/api/user/index";
 import { ElMessage } from "element-plus";
 
 let search = ref("");
@@ -294,7 +293,7 @@ const cancelClick2 = () => {
 };
 // 测边框确认
 const confirmClick2 = () => {
-  editUser(form2).then((res) => {
+  editUserAll(form2).then((res) => {
     if (res.data === "success") {
       ElMessage({
         message: "修改成功",
@@ -367,6 +366,12 @@ const handleAvatarSuccess = (e: any) => {
 };
 // 上传之前
 const beforeAvatarUpload = (e: any) => {};
+// 上传成功
+const handleAvatarSuccess2 = (e: any) => {
+  form2.img = new URL(e, import.meta.url).href;
+};
+// 上传之前
+const beforeAvatarUpload2 = (e: any) => {};
 </script>
 
 <style scoped lang="less">

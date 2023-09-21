@@ -34,10 +34,19 @@ export const delUser = (id: number) => {
   })
 }
 
-// 修改用户
+// 修改密码
 export const editUser = (params: object) => {
   return adminRequest({
     url: '/editUser',
+    method: 'POST',
+    params
+  })
+}
+
+// 修改用户
+export const editUserAll = (params: object) => {
+  return adminRequest({
+    url: '/editUserAll',
     method: 'POST',
     params
   })
