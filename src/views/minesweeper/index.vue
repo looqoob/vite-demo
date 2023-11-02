@@ -56,7 +56,15 @@
           <div class="header_bg_t_r"></div>
         </div>
       </el-col>
-      <el-col :span="6"><div class="grid-content ep-bg-purple" /></el-col>
+      <el-col :span="6">
+        <el-descriptions
+          title="胜利记录"
+          :column="1"
+        >
+          <el-descriptions-item label="胜利次数">{{ recordingTime.length }}</el-descriptions-item>
+          <!-- <el-descriptions-item label="Telephone">18100000000</el-descriptions-item> -->
+        </el-descriptions>
+      </el-col>
     </el-row>
   </el-card>
 </template>
@@ -90,12 +98,15 @@ let data = reactive({
   mine: 40
 })
 
+// 胜利记录
+let recordingTime = ref([])
+
 // 当困难度变化
 watch(difficulty, (newValue, oldValue) => {
   if (newValue == 0) {
     data.height = 9
     data.width = 9
-    data.mine = 20
+    data.mine = 9
   } else if (newValue == 1) {
     data.height = 16
     data.width = 16
@@ -138,9 +149,10 @@ onMounted(() => {
 const getWinList = () => {
   let userid = JSON.parse(localStorage.getItem('user') || "").id
   getMine(userid).then(res => {
-    console.log(res);
+    recordingTime.value = res.data.result
   })
 }
+
 
 // 初始化棋盘
 const initGame = () => {
@@ -190,7 +202,6 @@ const initGame = () => {
       }
     }
   });
-  console.log(count);
 }
 
 initGame()
@@ -215,6 +226,7 @@ const open = (x: number, y: number) => {
   if(arr.value[x][y] == -1) {
     gameOver(x, y)
   }
+  isWin()
 }
 
 // 插旗
@@ -229,6 +241,7 @@ const setFlag = (x: number, y: number) => {
     typeArr.value[x][y] = 0
     mine.value++
   }
+  isWin()
 }
 
 // 为 0 展开视野
@@ -294,20 +307,29 @@ watch(mine, (newValue, oldValue) => {
   if (numOne.value) {
     numOne.value.src = new URL(`./images/time/d${Math.floor(newValue % 10)}.svg`, import.meta.url).href
   }
-  if (mine.value == 0) {
-    let sum = 0
-    typeArr.value.forEach((item, index) => {
-      item.forEach((item2, index) => {
-        if (item2 != 0) {
-          sum++
-        }
-      })
-    })
-    if (sum == data.height * data.width) {
-      gameWin()
-    }
-  }
 })
+
+// 判断是否胜利
+const isWin = () => {
+  // 插旗数
+  let sum = 0
+  // 是否有未翻开的格子
+  let bl = false
+  typeArr.value.forEach((item, index) => {
+    item.forEach((item2, index) => {
+      if (item2 == 0) {
+        bl = true
+        return
+      }
+      if (item2 == 2) {
+        sum++
+      }
+    })
+  })
+  if (sum == data.mine && !bl) {
+    gameWin()
+  }
+}
 
 // 计算游戏时间，并显示在右上角
 watch(time, (newValue, oldValue) => {
@@ -344,7 +366,6 @@ const gameOver = (x: number, y: number) => {
 
 // 显示出所有雷
 const lookMine = () => {
-  console.log(123);
   for (let i = 0; i < data.height; i++) {
     for (let j = 0; j < data.width; j++) {
       if (arr.value[i][j] == -1 && typeArr.value[i][j] == 0) {
@@ -352,7 +373,6 @@ const lookMine = () => {
       }
     }
   }
-  console.log(arr.value);
 }
 
 // 游戏胜利
@@ -374,6 +394,7 @@ const gameWin = () => {
         type: 'success',
         message: '已保存',
       })
+      getWinList()
     }
   })
 }
